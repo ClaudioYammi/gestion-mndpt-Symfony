@@ -86,5 +86,42 @@
     })
     .catch(error => console.error('Error fetching data:', error));
 </script>
+ <div style="width:80%; margin:auto;">
+        <canvas id="myChartV"></canvas>
+    </div>
 
+    <script>
+        // Récupérer les données PHP passées depuis Symfony
+        var dataByMonth = {{ dataByMonth|json_encode|raw }};
+        
+        // Préparer les données pour Chart.js
+        var months = Object.keys(dataByMonth);
+        var counts = Object.values(dataByMonth);
+
+        // Créer le graphique avec Chart.js
+        var ctx = document.getElementById('myChartV').getContext('2d');
+        var myChartV = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'Nombre total de voitures',
+                    data: counts,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            precision: 0
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
 {% endblock %}

@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\EtatvoitureRepository;
+use App\Repository\VoitureRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class HomeController extends AbstractController
@@ -13,9 +14,29 @@ class HomeController extends AbstractController
     /**
      * @Route("/home", name="app_home")
      */
-    public function index(): Response
+    public function index(VoitureRepository $voitureRepository): Response
     {
-        return $this->render('home/index.html.twig', []);
+        // Récupérer le repository des voitures pour accéder aux données
+        $voitures = $voitureRepository->findAll();
+
+        // Créer un tableau pour stocker les données par mois
+        $dataByMonth = [];
+
+        // Remplir le tableau avec le nombre de voitures par mois
+        foreach ($voitures as $voiture) {
+            $monthYear = $voiture->getDateentrevoiture()->format('Y-m');
+            if (!isset($dataByMonth[$monthYear])) {
+                $dataByMonth[$monthYear] = 0;
+            }
+            $dataByMonth[$monthYear]++;
+        }
+
+        // Tri des données par mois (optionnel mais recommandé)
+        ksort($dataByMonth);
+
+        return $this->render('home/index.html.twig', [
+            'dataByMonth' => $dataByMonth,
+        ]);
     }
 
     /**
