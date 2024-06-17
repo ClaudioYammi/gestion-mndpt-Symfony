@@ -3,7 +3,7 @@
 {% block title %}Bienvenue{% endblock %}
 
 {% block body %}
-<style>
+{# <style>
     .welcome-container {
         display: flex;
         flex-direction: column;
@@ -45,5 +45,45 @@
     <p>vous êtes le Bienvenue. Nous sommes ravis de vous accueillir.</p>
     <p>Commencez dès maintenant à explorer nos fonctionnalités.</p>
     <a href="/dashboard" class="welcome-button">Accéder au tableau de bord</a>
+</div> #}
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            Graphe nombre total des voitures en panne et en bon état
+        </div>
+        <div class="card-body">
+            <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+        </div>
+    </div>
 </div>
+
+<script>
+    fetch('/voitures/statistics')
+        .then(response => response.json())
+        .then(data => {
+            var xValues = ["En panne", "En bon état"];
+            var yValues = [data.en_panne, data.en_bon_etat];
+            var barColors = ["red", "green"];
+
+            new Chart("myChart", {
+                type: "bar",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: "Graphe nombre total des voitures en panne et en bon état"
+                    }
+                }
+            });
+        });
+</script>
+
 {% endblock %}

@@ -9,80 +9,12 @@
 	<!-- My CSS -->
 	<link rel="stylesheet" href="{{ asset('style.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/bootstrap.min.css') }}"/>
-
 	<title>Gestion voiture</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 </head>
 <body>
-
-
 	<!-- SIDEBAR -->
-	<section id="sidebar">
-		<a href="#" class="profile">
-			<img src="/img/logo2.png">
-		</a>
-		
-		<ul class="side-menu top">
-			<li class="active">
-				<a href="dashboard/index.html.twig">
-					<i class='bx bxs-dashboard' ></i>
-					<span class="text">Dashboard</span>
-				</a>
-			</li>
-			<li>
-				<a href="{{ path('app_direction_new') }}">
-					<i class='bx bxs-shopping-bag-alt' ></i>
-					<span class="text">Direction</span>
-				</a>
-			</li>
-			
-			
-			<li>
-				<a href="{{ path('app_chauffeur_new') }}">
-					<i class='bx bxs-group' ></i>
-					<span class="text">Chauffeur</span>
-				</a>
-			</li>
-			
-			<li>
-				<a href="{{ path('app_voiture_new') }}">
-					<i class='bx bxs-doughnut-chart' ></i>
-					<span class="text"> voiture</span>
-				</a>
-			</li>
-			<li>
-				<a href="{{ path('app_detentionvoiture_new') }}">
-					<i class='bx bxs-doughnut-chart' ></i>
-					<span class="text">Detentation voiture</span>
-				</a>
-			</li>
-			<li>
-				<a href="{{ path('app_etatvoiture_new') }}">
-					<i class='bx bxs-shopping-bag-alt' ></i>
-					<span class="text">Etat voiture</span>
-				</a>
-			</li>
-			<li>
-				<a href="{{ path('app_personneldetenteur_new') }}">
-					<i class='bx bxs-group' ></i>
-					<span class="text">Personnel detenteur </span>
-				</a>
-			</li>
-		</ul>
-		<ul class="side-menu">
-			<li>
-				
-			</li>
-			<li>
-				<a href="{{ path('app_login') }}" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
-					<span class="text">Logout</span>
-				</a>
-			</li>
-		</ul>
-	</section>
-	<!-- SIDEBAR -->
-
-
+	{% include '_layouts/_sidebar.html.twig' %}
 
 	<!-- CONTENT -->
 	<section id="content">
@@ -130,13 +62,13 @@
 			</div>
 
 			<div class="left">
-				{% block body %}{% endblock %}
+				{% block body %}
+				{% endblock %}
 				</div>
 		</main>
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
-	
 
 	<script src="script.js"></script>
 </body>
