@@ -47,43 +47,44 @@
     <a href="/dashboard" class="welcome-button">Accéder au tableau de bord</a>
 </div> #}
 
-<div class="container mt-5">
-    <div class="card">
-        <div class="card-header">
-            Graphe nombre total des voitures en panne et en bon état
-        </div>
-        <div class="card-body">
-            <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-        </div>
+<div class="card mt-5">
+  
+    <div class="card-header">
+      Graphe nombre total des voitures en panne et en bonne état
     </div>
+    
+      <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+    
+  
 </div>
 
 <script>
-    fetch('/voitures/statistics')
-        .then(response => response.json())
-        .then(data => {
-            var xValues = ["En panne", "En bon état"];
-            var yValues = [data.en_panne, data.en_bon_etat];
-            var barColors = ["red", "green"];
+  fetch('/api/etat-voitures')
+    .then(response => response.json())
+    .then(data => {
+      var xValues = ["En panne", "En Bon Etat"];
+      var yValues = [data.en_panne, data.en_bon_etat];
+      var barColors = ["red", "green"];
 
-            new Chart("myChart", {
-                type: "bar",
-                data: {
-                    labels: xValues,
-                    datasets: [{
-                        backgroundColor: barColors,
-                        data: yValues
-                    }]
-                },
-                options: {
-                    legend: { display: false },
-                    title: {
-                        display: true,
-                        text: "Graphe nombre total des voitures en panne et en bon état"
-                    }
-                }
-            });
-        });
+      new Chart("myChart", {
+        type: "bar",
+        data: {
+          labels: xValues,
+          datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+          }]
+        },
+        options: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: "Graphe nombre total des voitures en panne et en bonne état"
+          }
+        }
+      });
+    })
+    .catch(error => console.error('Error fetching data:', error));
 </script>
 
 {% endblock %}

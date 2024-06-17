@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class EtatvoitureType extends AbstractType
 {
@@ -17,14 +18,18 @@ class EtatvoitureType extends AbstractType
         $builder
             ->add('numetat', null,[
                 'attr' => [
-                    'class' => 'form-control',]
+                    'class' => 'form-select',]
                     
                 ],)
-            ->add('etat', null,[
-                'attr' => [
-                    'class' => 'form-control',]
-                    
-                ],)
+                ->add('etat', ChoiceType::class, [
+                    'choices' => [
+                        'Bon État' => Etatvoiture::ETAT_BON,
+                        'Mauvais État' => Etatvoiture::ETAT_MAUVAIS,
+                    ],
+                    'attr' => [
+                        'class' => 'form-select',
+                    ],
+                ])
             ->add('dateetat', null, [
                 'widget' => 'single_text',
             ])
@@ -32,13 +37,13 @@ class EtatvoitureType extends AbstractType
                 'class' => direction::class,
                 'choice_label' => 'id',
                 'attr' => [
-                    'class' => 'form-control',]
+                    'class' => 'form-select',]
             ])
             ->add('matriculevoiture', EntityType::class, [
                 'class' => voiture::class,
                 'choice_label' => 'id',
                 'attr' => [
-                    'class' => 'form-control',]
+                    'class' => 'form-select',]
             ])
         ;
     }

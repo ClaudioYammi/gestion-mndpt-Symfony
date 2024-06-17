@@ -5,7 +5,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\VoitureRepository;
+use App\Repository\EtatvoitureRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class HomeController extends AbstractController
 {
@@ -18,27 +19,21 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/voitures/statistics", name="voitures_statistics")
+     * @Route("/api/etat-voitures", name="api_etat_voitures", methods={"GET"})
      */
-    public function getVoitureStatistics(VoitureRepository $voitureRepository): Response
+    public function getEtatVoitures(EtatvoitureRepository $etatvoitureRepository): JsonResponse
     {
-        $voitures = $voitureRepository->findAll();
-        $enPanne = 0;
-        $enBonEtat = 0;
+        // Récupérer les données depuis le repository
+        $totalEnPanne = $etatvoitureRepository->count(['etat' => 'mauvaisetat']);
+        $totalEnBonEtat = $etatvoitureRepository->count(['etat' => 'bonetat']);
 
-        foreach ($voitures as $voiture) {
-            foreach ($voiture->getEtatvoitures() as $etat) {
-                if ($etat->getEtat() === 'Enpanne') {
-                    $enPanne++;
-                } elseif ($etat->getEtat() === 'Enbonétat') {
-                    $enBonEtat++;
-                }
-            }
-        }
+        // Préparer les données pour le JSON
+        $data = [
+            'en_panne' => $totalEnPanne,
+            'en_bon_etat' => $totalEnBonEtat,
+        ];
 
-        return $this->json([
-            'en_panne' => $enPanne,
-            'en_bon_etat' => $enBonEtat,
-        ]);
+        // Retourner une réponse JSON
+        return new JsonResponse($data);
     }
 }

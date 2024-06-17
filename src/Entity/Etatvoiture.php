@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use InvalidArgumentException;
 use App\Repository\EtatvoitureRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Etatvoiture
 {
+    const ETAT_BON = 'bonetat';
+    const ETAT_MAUVAIS = 'mauvaisetat';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -66,6 +69,9 @@ class Etatvoiture
 
     public function setEtat(string $etat): self
     {
+        if (!in_array($etat, [self::ETAT_BON, self::ETAT_MAUVAIS])) {
+            throw new InvalidArgumentException("Etat invalide: $etat");
+        }
         $this->etat = $etat;
 
         return $this;
