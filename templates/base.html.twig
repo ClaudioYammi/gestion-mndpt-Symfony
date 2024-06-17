@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="{{ asset('style.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap/bootstrap.min.css') }}"/>
+
+	<title>Gestion voiture</title>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="profile">
+			<img src="/img/logo2.png">
+		</a>
+		
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="dashboard/index.html.twig">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ path('app_direction_new') }}">
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text">Direction</span>
+				</a>
+			</li>
+			
+			
+			<li>
+				<a href="{{ path('app_chauffeur_new') }}">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Chauffeur</span>
+				</a>
+			</li>
+			
+			<li>
+				<a href="{{ path('app_voiture_new') }}">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text"> voiture</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ path('app_detentionvoiture_new') }}">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">Detentation voiture</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ path('app_etatvoiture_new') }}">
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text">Etat voiture</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ path('app_personneldetenteur_new') }}">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Personnel detenteur </span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				
+			</li>
+			<li>
+				<a href="{{ path('app_login') }}" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a href="#" class="nav-link">Categories</a>
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			<a href="#" class="notification">
+				<i class='bx bxs-bell' ></i>
+				<span class="num">8</span>
+			</a>
+			<a href="#" class="profile">
+				<img src="/img/admin.jpg">
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Dashboard</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Home</a>
+						</li>
+					</ul>
+				</div>
+				<a href="#" class="btn-download">
+					<i class='bx bxs-cloud-download' ></i>
+					<span class="text">Download PDF</span>
+				</a>
+			</div>
+
+			<div class="left">
+				{% block body %}{% endblock %}
+				</div>
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	
+
+	<script src="script.js"></script>
+</body>
+</html>

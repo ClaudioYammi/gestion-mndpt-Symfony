@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Direction{% endblock %}
+
+{% block body %}
+    <h1>Create new Direction</h1>
+
+    {{ include('direction/_form.html.twig') }}
+
+    <a href="{{ path('app_direction_index') }}"class="btn btn-block btn-dark btn-sm"><i class="fas fa-arrow-left mr-2"></i>back to list</a>
+{% endblock %}

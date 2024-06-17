@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block body %}
+    
+<h1>My Profile</h1>
+
+{% if app.user %}
+    <p>
+        {{ app.user.infos | striptags('<br>') | raw }}
+        <strong>Pseudo :</strong> {{ app.user.pseudo }} <br>
+        <strong>Email :</strong> {{ app.user.email }} <br>
+        <strong>Register date :</strong> {{ app.user.createdAt | date('d-m-Y H:i') }} <br>
+        <strong>Role(s) :</strong> {{ app.user.roles | join(', ') }}
+        {# {% for role in app.user.roles %}
+            {{ role }}
+        {% endfor %} #}
+    </p>
+{% endif %}
+
+{% endblock %}

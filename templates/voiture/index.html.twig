@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Liste Voiture {% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">Liste des voitures</h1>
+
+    {{ form_start(searchForm, {'attr': {'class': 'mb-4'}}) }}
+    <div class="input-group">
+        {{ form_widget(searchForm.keyword) }}
+        <div class="input-group-append">
+            {{ form_widget(searchForm.search) }}
+        </div>
+    </div>
+    {{ form_end(searchForm) }}
+
+    {% if voitures is empty %}
+        <p class="text-white">Aucun enregistrement trouvé.</p>
+    {% else %}
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Matricule</th>
+                    <th>Date d'entrée</th>
+                    <th>Matricule chauffeur</th>
+                    <th>Direction</th>
+                    <th>Genre</th>
+                    <th>Marque</th>
+                    <th>Type</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for voiture in voitures %}
+                    <tr>
+                        <td>{{ voiture.id }}</td>
+                        <td>{{ voiture.matriculevoiture }}</td>
+                        <td>{{ voiture.dateentrevoiture ? voiture.dateentrevoiture|date('Y-m-d') : '' }}</td>
+                        <td>{{ voiture.matriculechauffeur }}</td>
+                        <td>{{ voiture.abrdirection }}</td>
+                        <td>{{ voiture.genre }}</td>
+                        <td>{{ voiture.marque }}</td>
+                        <td>{{ voiture.type }}</td>
+                        <td>
+                            <a href="{{ path('app_voiture_show', {'id': voiture.id}) }}" class="btn btn-secondary btn-sm"><i class="fas fa-eye"></i> Voir</a>
+                            <a href="{{ path('app_voiture_edit', {'id': voiture.id}) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Modifier</a>
+                            <a href="{{ path('app_voiture_pdf', {'id': voiture.id}) }}" class="btn btn-dark btn-sm"><i class="fas fa-file-pdf "></i>Exporter en PDF</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="9">Aucun enregistrement trouvé.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_voiture_new') }}" class="btn btn-dark btn-sm">Créer une nouvelle voiture</a>
+    {% endif %}
+{% endblock %}

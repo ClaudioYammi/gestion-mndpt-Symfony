@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Voiture{% endblock %}
+
+{% block body %}
+<style>
+
+        
+</style>
+
+<style>
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  width: 300px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card h3 {
+  margin: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.card p {
+  margin: 0 20px 20px;
+  font-size: 16px;
+  color: #666;
+}
+
+.card .btn {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  background-color: #007bff;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  border-top: 1px solid #eee;
+}
+
+.card .btn:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+  }
+}
+        
+</style>
+<div class="card-container">
+  <div class="card">
+    <img src="/img/voiture1.jpg" alt="Image 1">
+    <h3>TYPE</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    <a href="{{ path('app_type_new') }}" class="btn">Nouveau type voiture</a>
+  </div>
+  
+  <div class="card">
+    <img src="/img/voiture2.jpg" alt="Image 2">
+    <h3>GENRE</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    <a href="{{ path('app_genre_new') }}" class="btn">Nouveau genre voiture</a>
+  </div>
+  
+  <div class="card">
+    <img src="/img/voitur3.jpg" alt="Image 3">
+    <h3>MARQUE</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    <a href="{{ path('app_marque_new') }}" class="btn">Nouveau marque voiture</a>
+  </div>
+  
+  
+</div>
+<div class="container">
+    <h1>Create new Voiture</h1>
+
+    {{ include('voiture/_form.html.twig') }}
+
+    <a href="{{ path('app_voiture_index') }}"class="btn btn-block btn-dark btn-sm"><i class="fas fa-arrow-left mr-2"></i>back to list</a>
+{% endblock %}

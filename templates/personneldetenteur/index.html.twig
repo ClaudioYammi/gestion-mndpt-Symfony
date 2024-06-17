@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personneldetenteur index{% endblock %}
+
+{% block body %}
+    <h1>Personneldetenteur index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Matriculepersonnel</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Telephone</th>
+                <th>Adresse</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for personneldetenteur in personneldetenteurs %}
+            <tr>
+                <td>{{ personneldetenteur.id }}</td>
+                <td>{{ personneldetenteur.matriculepersonnel }}</td>
+                <td>{{ personneldetenteur.nom }}</td>
+                <td>{{ personneldetenteur.prenom }}</td>
+                <td>{{ personneldetenteur.telephone }}</td>
+                <td>{{ personneldetenteur.adresse }}</td>
+                <td>
+                    <a href="{{ path('app_personneldetenteur_show', {'id': personneldetenteur.id}) }}">show</a>
+                    <a href="{{ path('app_personneldetenteur_edit', {'id': personneldetenteur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_personneldetenteur_new') }}">Create new</a>
+{% endblock %}

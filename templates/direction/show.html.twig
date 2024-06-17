@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Direction{% endblock %}
+
+{% block body %}
+    <h1>Direction</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ direction.id }}</td>
+            </tr>
+            <tr>
+                <th>Abrdirection</th>
+                <td>{{ direction.abrdirection }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ direction.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_direction_index') }}">back to list</a>
+
+    <a href="{{ path('app_direction_edit', {'id': direction.id}) }}">edit</a>
+
+    {{ include('direction/_delete_form.html.twig') }}
+{% endblock %}

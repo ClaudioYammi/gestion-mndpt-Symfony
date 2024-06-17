@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Genre{% endblock %}
+{% block body %}
+<style>.back-button {
+  display: inline-block;
+  background-color: #f1da0c;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.back-button i {
+  margin-right: 5px;
+}
+
+.back-button:hover {
+  background-color: #d9db6b;
+}</style>
+
+    <h1>Create new Genre</h1>
+
+    {{ include('genre/_form.html.twig') }}
+
+    <a href="{{ path('app_genre_index') }}"class="btn btn-block btn-dark btn-sm"><i class="fas fa-arrow-left mr-2"></i>back to list</a>
+     <a href="{{ path('app_voiture_new') }}" class="back-button">
+  <i class="fas fa-arrow-left"></i>
+  Retour
+</a>
+{% endblock %}

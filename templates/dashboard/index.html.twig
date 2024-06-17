@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Tableau de bord</h1>
+
+    <h2>Nombre total de voitures</h2>
+    <p>{{ totalVoitures }}</p>
+
+    <h2>Nombre de voitures par direction</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Direction</th>
+                <th>Nombre de voitures</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in voituresByDirection %}
+                <tr>
+                    <td>{{ voiture.abrdirection }}</td>
+                    <td>{{ voiture.total_voitures }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Nombre de voitures en bon état et en panne par direction</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Direction</th>
+                <th>Etat</th>
+                <th>Nombre de voitures</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in voituresParEtatParDirection %}
+                <tr>
+                    <td>{{ data.abr }}</td>
+                    <td>{{ data.etat }}</td>
+                    <td>{{ data.total_voitures }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

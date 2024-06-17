@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personneldetenteur{% endblock %}
+
+{% block body %}
+    <h1>Personneldetenteur</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ personneldetenteur.id }}</td>
+            </tr>
+            <tr>
+                <th>Matriculepersonnel</th>
+                <td>{{ personneldetenteur.matriculepersonnel }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ personneldetenteur.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ personneldetenteur.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ personneldetenteur.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ personneldetenteur.adresse }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_personneldetenteur_index') }}">back to list</a>
+
+    <a href="{{ path('app_personneldetenteur_edit', {'id': personneldetenteur.id}) }}">edit</a>
+
+    {{ include('personneldetenteur/_delete_form.html.twig') }}
+{% endblock %}

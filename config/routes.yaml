@@ -1,0 +1,11 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+#exportation pdf
+app_voiture_pdf:
+  path: /generate-pdf/{id}
+  controller: App\Controller\VoitureController::generatePdf
+#page d'accuille
+target_page:
+   path: /accuille
+   controller: App\Controller\AccuilleController::index

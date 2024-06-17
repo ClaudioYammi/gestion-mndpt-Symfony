@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>
+    Argon Dashboard 2 by Creative Tim
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="{{ asset('css/connexion/nucleo-icons.css') }}" rel="stylesheet" />
+  <link href="{{ asset('css/connexion/nucleo-svg.css') }}" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="{{ asset('css/connexion/nucleo-svg.css') }}" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="{{ asset('css/connexion/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
+</head>
+
+<body class="">
+  <div class="container position-sticky z-index-sticky top-0">
+    <div class="row">
+      <div class="col-12">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg blur border-radius-lg top-0 z-index-3 shadow position-absolute mt-4 py-2 start-0 end-0 mx-4">
+          <div class="container-fluid">
+            <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="../pages/dashboard.html">
+              Activia - Gestion de Stock
+            </a>
+            
+            <div class="collapse navbar-collapse" id="navigation">
+              <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                  <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="../pages/dashboard.html">
+                    
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link me-2" >
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link me-2" >
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link me-2" >
+                  </a>
+                </li>
+              </ul>
+              <ul class="navbar-nav d-lg-block d-none">
+                <li class="nav-item">
+                  <a href="{{ path('app_login') }}" class="btn btn-sm mb-0 me-1 btn-primary">Connexion</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <!-- End Navbar -->
+      </div>
+    </div>
+  </div>
+<form method="post">
+
+  <main class="main-content  mt-0">
+    <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signup-cover.jpg'); background-position: top;">
+      <span class="mask bg-gradient-dark opacity-6"></span>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 text-center mx-auto">
+            <h1 class="text-white mb-2 mt-5">Récupération Compte</h1>
+            <p class="text-lead text-white">Ecrivez votre email pour le lien de réinitialisation</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
+        <div class="col-xl-5 col-lg-5 col-md-7 mx-auto">
+          <div class="card z-index-0">
+            <div class="mx-4 my-3">
+                {{ form_start(requestForm) }}
+                    {{ form_row(requestForm.email) }}
+                    <div class="mx-auto">
+                        <small >
+                            Envoyez vers Gmail
+                        </small>
+                    </div>
+                    <div class="row">
+                        <div class="col-6  mx-auto mt-4">
+                            <button class="btn btn-primary">Envoyez l'email</button>
+                        </div>
+                    </div>
+                {{ form_end(requestForm) }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</form>
+</body>
+
+</html>

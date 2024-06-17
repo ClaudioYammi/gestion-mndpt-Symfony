@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Etatvoiture{% endblock %}
+
+{% block body %}
+    <h1>Etatvoiture</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ etatvoiture.id }}</td>
+            </tr>
+            <tr>
+                <th>Numetat</th>
+                <td>{{ etatvoiture.numetat }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ etatvoiture.etat }}</td>
+            </tr>
+            <tr>
+                <th>Dateetat</th>
+                <td>{{ etatvoiture.dateetat ? etatvoiture.dateetat|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_etatvoiture_index') }}">back to list</a>
+
+    <a href="{{ path('app_etatvoiture_edit', {'id': etatvoiture.id}) }}">edit</a>
+
+    {{ include('etatvoiture/_delete_form.html.twig') }}
+{% endblock %}
