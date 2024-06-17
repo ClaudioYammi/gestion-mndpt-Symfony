@@ -87,28 +87,58 @@
     .catch(error => console.error('Error fetching data:', error));
 </script>
  <div style="width:80%; margin:auto;">
-        <canvas id="myChartV"></canvas>
+        <!-- Graphique pour le nombre total de voitures -->
+        <canvas id="totalChart"></canvas>
+    </div>
+    
+    <div style="width:80%; margin:auto;">
+        <!-- Graphique pour le nombre de voitures par direction -->
+        <canvas id="directionChart"></canvas>
     </div>
 
     <script>
         // Récupérer les données PHP passées depuis Symfony
-        var dataByMonth = {{ dataByMonth|json_encode|raw }};
-        
-        // Préparer les données pour Chart.js
-        var months = Object.keys(dataByMonth);
-        var counts = Object.values(dataByMonth);
+        var totalVoitures = {{ totalVoitures }};
+        var voituresByDirection = {{ voituresByDirection|json_encode|raw }};
 
-        // Créer le graphique avec Chart.js
-        var ctx = document.getElementById('myChartV').getContext('2d');
-        var myChartV = new Chart(ctx, {
-            type: 'bar',
+        // Préparer les données pour le graphique des directions
+        var directionLabels = Object.keys(voituresByDirection);
+        var directionData = Object.values(voituresByDirection);
+
+        // Créer le graphique pour le nombre total de voitures
+        var ctxTotal = document.getElementById('totalChart').getContext('2d');
+        var totalChart = new Chart(ctxTotal, {
+            type: 'pie',
             data: {
-                labels: months,
+                labels: ['Total des voitures'],
                 datasets: [{
                     label: 'Nombre total de voitures',
-                    data: counts,
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
+                    data: [totalVoitures, "none"], // Ici, 500 est un exemple, ajustez selon vos besoins
+                    backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(255, 99, 132, 0.6)'],
+                    borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    position: 'top',
+                }
+            }
+        });
+
+        // Créer le graphique pour le nombre de voitures par direction
+        var ctxDirection = document.getElementById('directionChart').getContext('2d');
+        var directionChart = new Chart(ctxDirection, {
+            type: 'bar',
+            data: {
+                labels: directionLabels,
+                datasets: [{
+                    label: 'Nombre de voitures par direction',
+                    data: directionData,
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
                 }]
             },

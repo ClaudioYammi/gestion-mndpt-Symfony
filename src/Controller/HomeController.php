@@ -8,34 +8,46 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\EtatvoitureRepository;
 use App\Repository\VoitureRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use App\Entity\Direction; 
+use Doctrine\ORM\EntityManagerInterface; // Importez le gestionnaire d'entité
 class HomeController extends AbstractController
 {
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Route("/home", name="app_home")
      */
     public function index(VoitureRepository $voitureRepository): Response
     {
-        // Récupérer le repository des voitures pour accéder aux données
-        $voitures = $voitureRepository->findAll();
+        // Récupérer le nombre total de voitures
+        $totalVoitures = $voitureRepository->createQueryBuilder('v')
+            ->select('COUNT(v.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
 
-        // Créer un tableau pour stocker les données par mois
-        $dataByMonth = [];
+        // Récupérer le nombre de voitures par direction
+        $voituresByDirection = [];
+        
+        // Utilisation du gestionnaire d'entité pour obtenir le repository de Direction
+        $directionRepository = $this->entityManager->getRepository(Direction::class);
+        $directions = $directionRepository->findAll();
 
-        // Remplir le tableau avec le nombre de voitures par mois
-        foreach ($voitures as $voiture) {
-            $monthYear = $voiture->getDateentrevoiture()->format('Y-m');
-            if (!isset($dataByMonth[$monthYear])) {
-                $dataByMonth[$monthYear] = 0;
-            }
-            $dataByMonth[$monthYear]++;
+        foreach ($directions as $direction) {
+            $voituresByDirection[$direction->getabrdirection()] = $voitureRepository->createQueryBuilder('v')
+                ->select('COUNT(v.id)')
+                ->where('v.abrdirection = :direction')
+                ->setParameter('direction', $direction)
+                ->getQuery()
+                ->getSingleScalarResult();
         }
-
-        // Tri des données par mois (optionnel mais recommandé)
-        ksort($dataByMonth);
-
         return $this->render('home/index.html.twig', [
-            'dataByMonth' => $dataByMonth,
+            'totalVoitures' => $totalVoitures,
+            'voituresByDirection' => $voituresByDirection,
         ]);
     }
 
